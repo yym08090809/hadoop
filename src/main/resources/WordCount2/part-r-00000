@@ -1,0 +1,7 @@
+flume	32
+hadoop	160
+hive	102
+kafka	64
+spark	96
+sqoop	98
+zookeeper	64

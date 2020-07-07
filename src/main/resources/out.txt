@@ -1,0 +1,3 @@
+hadoop=160
+hive=102
+sqoop=98
