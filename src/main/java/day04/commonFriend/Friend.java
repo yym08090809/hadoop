@@ -1,7 +1,5 @@
 package day04.commonFriend;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
-import day03.practice.RemoveCommon;
 import org.apache.commons.io.FileUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
@@ -36,12 +34,13 @@ public class Friend {
             for (Text value : values) {
                 sb.append(value);
             }
+
             context.write(key,new Text(sb.toString()));
         }
     }
 
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
-// job
+        // job
         Configuration conf = new Configuration();
         Job job = Job.getInstance(conf);
         //  job 提交内部类

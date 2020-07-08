@@ -13,6 +13,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class Friend2 {
     public static class MapTask extends Mapper<LongWritable, Text,Text,Text> {
@@ -22,6 +23,7 @@ public class Friend2 {
             String[] splits = value.toString().toString().split("\t");
             String values = splits[0];
             String[] friends = splits[1].toString().split("");
+            Arrays.sort(friends);
             for (int i = 0; i < friends.length-1; i++) {
                 for (int j = i+1; j < friends.length; j++) {
                     context.write(new Text(friends[i]+"-"+friends[j]),new Text(values));
