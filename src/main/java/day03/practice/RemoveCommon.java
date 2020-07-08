@@ -25,7 +25,7 @@ public class RemoveCommon {
             if (arr.length == 7) {
                 //arr[0] = String.valueOf(Integer.valueOf(arr[0]).intValue()/10000);
                 arr[0] = arr[0].substring(0, 3);
-                context.write(new Text(arr[0]+ "\t" +arr[1] + "\t" + arr[2] + "\t" + arr[3]), new Text());
+                context.write(new Text(arr[0]+ "\t" +arr[1] + "\t" + arr[2] + "\t"), new Text(arr[3]));
             }
         }
     }
@@ -34,7 +34,11 @@ public class RemoveCommon {
     public static class ReduceTask extends Reducer<Text, Text, Text, Text> {
         @Override
         protected void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
-                context.write(key, new Text());
+            for (Text value : values) {
+
+                context.write(key, new Text(value));
+                break;
+            }
         }
     }
 

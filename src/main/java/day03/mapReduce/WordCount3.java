@@ -46,9 +46,9 @@ public class WordCount3 {
         conf.set("fs.defaultFS","hdfs://192.168.88.110:9000");
         Job job = Job.getInstance(conf);
         //  job 提交内部类
-        job.setMapperClass(WordCount2.MapTask.class);
-        job.setReducerClass(WordCount2.ReduceTask.class);
-        job.setJarByClass(WordCount2.class);
+        job.setMapperClass(MapTask.class);
+        job.setReducerClass(ReduceTask.class);
+        job.setJarByClass(WordCount3.class);
         //四个输入参数校验
         // map:Text IntWritable
         job.setMapOutputKeyClass(Text.class);
