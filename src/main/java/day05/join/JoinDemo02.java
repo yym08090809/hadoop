@@ -45,13 +45,14 @@ public class JoinDemo02 {
                 sum += value.get();
                 count++;
             }
-            map.put(key.toString(),new Integer(sum/count));
+            int avg = sum / count;
+            map.put(key.toString(),avg);
         }
 
         @Override
         protected void cleanup(Context context) throws IOException, InterruptedException {
             Set<Map.Entry<String, Integer>> entries = map.entrySet();
-            ArrayList<Map.Entry<String, Integer>> list = new ArrayList<>();
+            ArrayList<Map.Entry<String, Integer>> list = new ArrayList<>(entries);
             list.sort(new Comparator<Map.Entry<String, Integer>>() {
                 @Override
                 public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
