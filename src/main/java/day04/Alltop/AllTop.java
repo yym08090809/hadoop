@@ -1,6 +1,5 @@
 package day04.Alltop;
 
-import day04.topn.LocakTop;
 import org.apache.commons.io.FileUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
@@ -28,15 +27,16 @@ public class AllTop {
         @Override
         protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
             MovieBean movieBean = mapper.readValue(value.toString(), MovieBean.class);
-            context.write(new Text(movieBean.getMovie()), movieBean);
+            context.write(new Text(), movieBean);
         }
     }
 
     //reduce
     public static class ReduceTask extends Reducer<Text, MovieBean, MovieBean, NullWritable> {
+        ArrayList<MovieBean> movieBeans = new ArrayList<>();
         @Override
         protected void reduce(Text key, Iterable<MovieBean> values, Context context) throws IOException, InterruptedException {
-            ArrayList<MovieBean> movieBeans = new ArrayList<>();
+
             for (MovieBean value : values) {
                 MovieBean movieBean = new MovieBean();
                 movieBean.set(value);
@@ -48,7 +48,7 @@ public class AllTop {
                     return o2.getRate() - o1.getRate();
                 }
             });
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 10; i++) {
                 context.write(movieBeans.get(i), null);
             }
 
@@ -61,9 +61,9 @@ public class AllTop {
         Configuration conf = new Configuration();
         Job job = Job.getInstance(conf);
         //  job 提交内部类
-        job.setMapperClass(LocakTop.MapTask.class);
-        job.setReducerClass(LocakTop.ReduceTask.class);
-        job.setJarByClass(LocakTop.class);
+        job.setMapperClass(MapTask.class);
+        job.setReducerClass(ReduceTask.class);
+        job.setJarByClass(AllTop.class);
         //四个输入参数校验
         // map:Text IntWritable
         job.setMapOutputKeyClass(Text.class);
