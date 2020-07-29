@@ -20,7 +20,8 @@ import java.util.Comparator;
 
 public class DBLocakTop {
     private static final String driverClass = "com.mysql.jdbc.Driver";
-    private static final String dbUrl = "jdbc:mysql://127.0.0.1:3306/hadoop?useUnicode=true&amp;characterEncoding=uft8&amp;serverTimezone=GMT";
+    //?useUnicode=true&amp;characterEncoding=uft8&amp;serverTimezone=GMT
+    private static final String dbUrl = "jdbc:mysql://39.99.219.85/hadoop";
     private static final String userName ="root";
     private static final String passWord = "123456";
     private static final String tableName = "movies";
